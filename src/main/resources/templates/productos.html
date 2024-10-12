@@ -16,13 +16,20 @@
             </ul>
         </nav>
     </header>
-        <p>Hola</p>
+        <p>Añadir producto</p>
+        <form th:action="@{/api/products}" th:object="${product}" method="post" style="display:inline;">
+<!--            <input type="text" name="name" placeholder="Nombre del producto" required>-->
+            <input type="text" name="name" placeholder="Nombre del producto" required>
+            <input type="number" name="price" placeholder="Precio del producto" required>
+            <button type="submit">Añadir</button>
+        </form>
+
         <ul>
+            Lista de productos
             <li th:each="producto : ${allProductos}">
                 <span th:text="${producto.name}">Nombre Producto</span>
                 <span th:text="${producto.price}">Precio Producto</span>
-                <form th:action="@{/api/products/{id}(id=${producto.id})}" method="post" style="display:inline;">
-                    <input type="hidden" name="_method" value="delete" />
+                <form th:action="@{/api/products/delete/{id}(id=${producto.id})}" method="post" style="display:inline;">
                     <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</button>
                 </form>
 

@@ -23,19 +23,36 @@ public class ProductController {
     }
 
     //    Alternativa: devolver un producto utilizando ().orElse(null)
-    @GetMapping(value="/{id}")
+    @GetMapping(value="{id}")
     public Producto getProductById(@PathVariable Long id){
         Optional<Producto> product = productService.getProductById(id);
         return product.orElse(null);
     }
 
+//    @PostMapping()
+//    public void saveProduct(@RequestBody Producto product){
+//        productService.saveProduct(product);
+//    }
+
     @PostMapping()
-    public void saveProduct(@RequestBody Producto product){
+    public String saveProduct(@ModelAttribute Producto product){
         productService.saveProduct(product);
+        return "redirect:/productos";
     }
 
-    @DeleteMapping(value = "id")
-    public void deleteProduct(@PathVariable Long id){
+//    @DeleteMapping(value = "{id}")
+//    public void deleteProduct(@PathVariable Long id){
+//        productService.deleteProduct(id);
+//    }
+
+//    @PostMapping(value = "delete/{id}")
+//    public void deleteProduct(@PathVariable Long id){
+//        productService.deleteProduct(id);
+//    }
+
+    @PostMapping(value = "delete/{id}")
+    public String deleteProduct(@PathVariable Long id){
         productService.deleteProduct(id);
+        return "redirect:/productos";
     }
 }
