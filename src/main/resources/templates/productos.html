@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de productos</title>
+    <link rel="stylesheet" th:href="@{/estilos.css}" />
+</head>
+<body>
+    <header>
+        <h1>Mi Tienda Online</h1>
+        <nav>
+            <ul>
+                <li><a href="#" th:href="@{/}">Inicio</a></li>
+                <li><a href="#" th:href="@{/productos}">Productos</a></li>
+    <!--            <li><a href="#" th:href="@{/}">Carrito</a></li>-->
+            </ul>
+        </nav>
+    </header>
+        <p>Hola</p>
+        <ul>
+            <li th:each="producto : ${allProductos}">
+                <span th:text="${producto.name}">Nombre Producto</span>
+                <span th:text="${producto.price}">Precio Producto</span>
+                <form th:action="@{/api/products/{id}(id=${producto.id})}" method="post" style="display:inline;">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</button>
+                </form>
+
+            </li>
+        </ul>
+    </body>
+</html>
