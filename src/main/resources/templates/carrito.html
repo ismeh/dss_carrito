@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo de productos</title>
+    <link rel="stylesheet" th:href="@{/estilos.css}" />
+</head>
+<body>
+    <header>
+        <h1>Mi Tienda Online</h1>
+        <nav>
+            <ul>
+                <li><a href="#" th:href="@{/}">Inicio</a></li>
+                <li><a href="#" th:href="@{/productos}">Productos</a></li>
+                <li><a href="#" th:href="@{/form/producto}">Añadir productos</a></li>
+                <li><a href="#" th:href="@{/cart}">Ver carrito</a></li>
+    <!--            <li><a href="#" th:href="@{/}">Carrito</a></li>-->
+            </ul>
+        </nav>
+    </header>
+    Productos de mi carrito
+    <form th:action="@{/cart/checkout}" method="post" style="display:inline;">
+        <button type="submit" onclick="return confirm('¿Estás seguro de que deseas realizar la compra?');">Comprar por <span th:text="${total_price}">$</span></button>
+    </form>
+
+    <ul>
+        <li th:each="producto : ${allProductos}">
+            <span th:text="${producto.name}">Nombre Producto</span>
+            <span th:text="${producto.price}">Precio Producto</span>
+            <form th:action="@{cart/delete/{id}(id=${producto.id})}" method="post" style="display:inline;">
+                <button type="submit" onclick="return confirm('¿Estás seguro de que deseas quitar este producto del carrito?');">Eliminar</button>
+            </form>
+
+        </li>
+    </ul>
+    </body>
+</html>

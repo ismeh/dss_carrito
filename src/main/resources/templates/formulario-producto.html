@@ -2,9 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Administrar productos    </title>
+    <title>Administrar productos</title>
+    <link rel="stylesheet" th:href="@{/estilos.css}" />
+
 </head>
 <body>
-    
+    <header>
+        <h1>Mi Tienda Online</h1>
+        <nav>
+            <ul>
+                <li><a href="#" th:href="@{/}">Inicio</a></li>
+                <li><a href="#" th:href="@{/productos}">Productos</a></li>
+                <li><a href="#" th:href="@{/form/producto}">Añadir productos</a></li>
+                <li><a href="#" th:href="@{/cart}">Ver carrito</a></li>
+                <!--            <li><a href="#" th:href="@{/}">Carrito</a></li>-->
+            </ul>
+        </nav>
+    </header>
+    <p>Añadir producto</p>
+    <form th:action="@{/api/products}" th:object="${product}" method="post" style="display:inline;">
+        <!--            <input type="text" name="name" placeholder="Nombre del producto" required>-->
+        <input type="text" name="name" placeholder="Nombre del producto" required>
+        <input type="number" name="price" placeholder="Precio del producto" required>
+        <button type="submit">Añadir</button>
+    </form>
 </body>
 </html>

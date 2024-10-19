@@ -10,8 +10,9 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-public class WebController {
+public class UriController {
     ProductController productController;
+    CarritoController carritoController;
 
     @RequestMapping(value = "productos")
     public String listProducts(Model model){
@@ -25,8 +26,22 @@ public class WebController {
     }
 
     @RequestMapping(value = "/")
-    public String root(){
-        return "productos";
+    public String root(Model model){
+        String template = listProducts(model);
+        return template;
+    }
+
+    @RequestMapping(value = "form/producto")
+    public String formProduct(){
+        return "formulario-producto";
+    }
+
+    @RequestMapping(value = "cart")
+    public String cart(Model model){
+        List<Producto> productosCarrito = carritoController.getAllProducts();
+        model.addAttribute("allProductos", productosCarrito);
+        model.addAttribute("total_price", carritoController.getTotal());
+        return "carrito";
     }
 
 }

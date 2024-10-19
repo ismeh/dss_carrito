@@ -1,7 +1,6 @@
 package com.dss.carrito.controladores;
 
 import com.dss.carrito.entidades.Producto;
-import com.dss.carrito.repositorios.ProductRepo;
 import com.dss.carrito.servicios.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +36,7 @@ public class ProductController {
     @PostMapping()
     public String saveProduct(@ModelAttribute Producto product){
         productService.saveProduct(product);
-        return "redirect:/productos";
+        return "redirect:/form/producto";
     }
 
 //    @DeleteMapping(value = "{id}")
