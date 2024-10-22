@@ -21,13 +21,18 @@
                         <button class="btn" type="submit"> Cerrar sesión </button>
                     </form>
                 </li>
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <form th:action="@{/export}" method="get">
+                        <button class="btn" type="submit"> Exportar BD </button>
+                    </form>
+                </li>
 <!--                <li sec:authorize="isAuthenticated()"><a href="#" th:action="@{/logout}" method="post" th:href="@{/logout}">Cerrar sesión</a></li>-->
 <!--                <li><a href="#" th:href="@{/login}">Iniciar sesión</a></li>-->
                 <!--            <li><a href="#" th:href="@{/}">Carrito</a></li>-->
             </ul>
         </nav>
     </header>
-        <spanLista de productos</span>
+        <span>Lista de productos</span>
         <ul>
             <li th:each="producto : ${allProductos}">
                 <span th:text="${producto.name}">Nombre Producto</span>
