@@ -54,4 +54,20 @@ public class ProductController {
         productService.deleteProduct(id);
         return "redirect:/productos";
     }
+
+    @PostMapping(value = "update/{id}")
+    public String updateProduct(@PathVariable Long id, @ModelAttribute Producto updatedProduct){
+        Optional<Producto> optionalProduct = productService.getProductById(id);
+
+        if (optionalProduct.isPresent()) {
+            Producto existingProduct = optionalProduct.get();
+            existingProduct.setName(updatedProduct.getName());
+            existingProduct.setPrice(updatedProduct.getPrice());
+
+            // Guardar cambios
+            productService.saveProduct(existingProduct);
+        }
+        return "redirect:/productos";
+    }
+
 }

@@ -11,6 +11,8 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class ProductService {
+
+    private CarritoService carritoService;
     private ProductRepo productRepo;
 
     public List<Producto> getAllProduct(){
@@ -27,6 +29,15 @@ public class ProductService {
     }
 
     public void deleteProduct(Long id){
+        carritoService.deleteProduct(id);
         productRepo.deleteById(id);
+    }
+
+    public void updateProduct(Long id, Producto product){
+        productRepo.save(product);
+    }
+
+    public void updateProduct(Producto product){
+        productRepo.save(product);
     }
 }

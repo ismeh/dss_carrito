@@ -7,14 +7,22 @@
 
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="/login" method="post">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Submit">
-    </form>
-    <p>Don't have an account? <a href="/register">Register</a></p>
+    <main>
+        <div class="login">
+            <div class="card_login">
+                <h2>Inicia sesión</h2>
+                <form th:action="@{/login}" method="post">
+                    <ul>
+                        <li><input type="text" id="username" name="username" placeholder="Usuario"></li><br>
+                        <li><input type="password" id="password" name="password" placeholder="Contraseña"></li><br><br>
+                        <li><input type="submit" value="Acceder"></li>
+                        <span th:if="${error}">
+                            <p >Credenciales no válidas</p>
+                        </span>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

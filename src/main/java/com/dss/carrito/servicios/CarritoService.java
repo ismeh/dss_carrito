@@ -1,7 +1,7 @@
 package com.dss.carrito.servicios;
 
 import com.dss.carrito.entidades.Producto;
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Service
-@AllArgsConstructor
+@NoArgsConstructor
 public class CarritoService {
     private List<Producto> productos = new ArrayList<>();
 
@@ -22,14 +22,25 @@ public class CarritoService {
     }
 
     public void deleteProduct(Long id){
-        productos.removeIf(producto -> producto.getId().equals(id));
+        for (Producto producto : productos) {
+            if(producto.getId().equals(id)){
+                productos.remove(producto);
+                return;
+            }
+        }
     }
 
     public void checkout(){
+//        generarPDFFactura();
         productos.clear();
     }
 
     public double getTotal(){
         return productos.stream().mapToDouble(Producto::getPrice).sum();
     }
+
+//    private generarPDFFactura(){
+//        // Generar PDF
+//
+//    }
 }
