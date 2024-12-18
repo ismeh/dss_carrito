@@ -2,13 +2,16 @@ package com.dss.carrito.controladores;
 
 import com.dss.carrito.entidades.Producto;
 import com.dss.carrito.servicios.CarritoService;
+import com.itextpdf.text.DocumentException;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.FileNotFoundException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -37,9 +40,8 @@ public class CarritoController {
     }
 
     @PostMapping(value = "checkout")
-    public String checkout(){
-        carritoService.checkout();
-        return "redirect:/cart";
+    public ResponseEntity<byte[]> checkout() throws DocumentException, FileNotFoundException {
+        return carritoService.checkout();
     }
 
     public String getTotal(){
