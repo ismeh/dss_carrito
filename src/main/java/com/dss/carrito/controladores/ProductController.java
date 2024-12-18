@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("api/products")
+@RequestMapping("products")
 public class ProductController {
     private ProductService productService;
 
